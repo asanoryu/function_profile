@@ -12,7 +12,7 @@ Usage:
 
 .. code-block:: python
 
-    from function_profile import profile
+    from function_profile_decorator import profile
 
     @profile(time_prof=True, mem_prof=True)
     def factoriel_loop(n: int) -> int:

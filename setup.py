@@ -10,7 +10,7 @@ README = (HERE / "README.rst").read_text()
 # This call to setup() does all the work
 setup(
     name="func-profile-decor",
-    version="0.1.2",
+    version="0.1.6",
     description="Profile a function using a simple decorator",
     long_description=README,
     long_description_content_type="text/x-rst",
@@ -23,7 +23,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["function_profile_decorator"],
     include_package_data=True,
     install_requires=["memory_profiler"],
 )
