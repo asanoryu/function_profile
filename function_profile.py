@@ -2,28 +2,38 @@
 import time
 from functools import wraps
 from memory_profiler import memory_usage
+from typing import Callable
 
 
-def profile(fn):
-    """Wrap a function and call it 2 times - once to measure time and once for memory."""
+def profile(time_prof: bool = True, mem_prof: bool = False) -> Callable:
+    """Multilayered decorator for wrapping a func with arguments.
+    
+    time_prof - measure run time - default: True
+    mem_prof - measure memory - default: False
+    """
 
-    @wraps(fn)
-    def inner(*args, **kwargs):
-        fn_kwargs_str = ", ".join(f"{k}={v}" for k, v in kwargs.items())
-        print(f"\n{fn.__name__}({fn_kwargs_str})")
+    def real_decorator(fn):
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            fn_kwargs_str = ", ".join(f"{k}={v}" for k, v in kwargs.items())
+            fn_args_str = ", ".join(f"{v}" for v in args)
+            print(f"\n{fn.__name__}({fn_args_str}, {fn_kwargs_str})")
 
-        # Measure time
-        t = time.perf_counter()
-        retval = fn(*args, **kwargs)
-        elapsed = time.perf_counter() - t
-        print(f"Time   {elapsed:0.4}")
+            if time_prof:
+                t = time.perf_counter()
+                retval = fn(*args, **kwargs)
+                elapsed = time.perf_counter() - t
+                print(f"Time   {elapsed:.8f}")
 
-        # Measure memory
-        mem, retval = memory_usage(
-            (fn, args, kwargs), retval=True, timeout=200, interval=1e-7
-        )
+            if mem_prof:
+                mem, retval = memory_usage(
+                    (fn, args, kwargs), retval=True, timeout=200, interval=1e-7
+                )
 
-        print(f"Memory {max(mem) - min(mem)}")
-        return retval
+                print(f"Memory {max(mem) - min(mem)}")
 
-    return inner
+            return retval
+
+        return wrapper
+
+    return real_decorator
