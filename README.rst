@@ -1,4 +1,5 @@
-# function_profile
+**function_profile decorator**
+
 Provides decorator for time and memory profiling of functions.
 
 Metrics:
@@ -9,8 +10,8 @@ Metrics:
 
 Usage:
 
+.. code-block:: python
 
-```python
     from function_profile import profile
 
     @profile(time_prof=True, mem_prof=True)
@@ -21,12 +22,12 @@ Usage:
             fac = fac * i
         return fac
 
-
-factoriel_loop(n=100)
-```
+    factoriel_loop(n=100)
 
 Output:
 
     factoriel_loop(, n=100)
+
     Time   0.00001450
+
     Memory 0.0546875

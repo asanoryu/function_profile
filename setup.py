@@ -5,15 +5,15 @@ from setuptools import setup
 HERE = pathlib.Path(__file__).parent
 
 # The text of the README file
-README = (HERE / "README.md").read_text()
+README = (HERE / "README.rst").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="function-profiler",
+    name="func-profile-decor",
     version="0.1.0",
     description="Profile a function using a simple decorator",
     long_description=README,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/asanoryu/function_profile",
     author="Vladislav Shumanov",
     author_email="vl.shumanov@gmail.com",
@@ -23,7 +23,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["function_profile"],
+    packages=["function_profile_decorator"],
     include_package_data=True,
     install_requires=["memory_profiler"],
 )
