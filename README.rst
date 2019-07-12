@@ -2,6 +2,10 @@
 
 Provides decorator for time and memory profiling of functions.
 
+Installation:
+
+    pip install func-profile-decor
+
 Metrics:
 
 * time - time for a single function call
